@@ -21,13 +21,19 @@ jobs:
     - name: Deploy to EC2
       run: |
         ssh -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
+          sudo rm -rf /home/ubuntu/terpnotes
+          sudo mkdir /home/ubuntu/terpnotes
+
+          eval `ssh-agent -s`
+          ssh-add ~/.ssh/terpnotes_git
+
           # Clone the repositories
-          sudo git clone git@github.com:Lin-Jacob/TerpNotesFE.git /home/ubuntu/terpnotes/frontend
-          sudo git clone git@github.com:olaniyisalami/TerpNotesBE.git /home/ubuntu/terpnotes/backend
+          git clone git@github.com:Lin-Jacob/TerpNotesFE.git /home/ubuntu/terpnotes/frontend
+          git clone git@github.com:olaniyisalami/TerpNotesBE.git /home/ubuntu/terpnotes/backend
 
           # Navigate to the frontend and build it
-          sudo cd /home/ubuntu/terpnotes/frontend
-          sudo npm install
+          cd /home/ubuntu/terpnotes/frontend
+          sudo npm install --legacy-peer-deps
           sudo npm run build
 
           # Navigate to the backend and set up
