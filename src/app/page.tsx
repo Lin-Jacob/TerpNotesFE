@@ -493,7 +493,7 @@ export default function Home() {
             Sign up today and explore the best UMD notes, study guides, and resources — curated by students, for students.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-            <Link href="/signup">
+            <Link href="/login">
               <button className="bg-[#CD1015] hover:bg-[#a60d11] transition-all text-white px-6 py-3 rounded-xl border hover:scale-105 text-lg">
                 Get Started
               </button>
