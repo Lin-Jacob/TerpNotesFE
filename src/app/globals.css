@@ -21,12 +21,17 @@ body {
   background-color: #F9F1E5;
 }
 
+button {
+  cursor: pointer;
+}
+
 /* === Animations === */
 @keyframes fadeInSlideUp {
   0% {
     opacity: 0;
     transform: translateY(40px) scale(0.9) rotate(0deg);
   }
+
   100% {
     opacity: 1;
     transform: translateY(0) scale(1) rotate(var(--rotation));
@@ -34,9 +39,12 @@ body {
 }
 
 @keyframes floatUpDown {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0) rotate(var(--rotation));
   }
+
   50% {
     transform: translateY(-10px) rotate(calc(var(--rotation) + 2deg));
   }
@@ -68,42 +76,49 @@ body {
   --rotation: -3deg;
   --delay: 0s;
 }
+
 .floating-logo:nth-child(2) {
   top: 30%;
   left: 70%;
   --rotation: 4deg;
   --delay: 0.15s;
 }
+
 .floating-logo:nth-child(3) {
   top: 55%;
   left: 20%;
   --rotation: -5deg;
   --delay: 0.3s;
 }
+
 .floating-logo:nth-child(4) {
   top: 65%;
   left: 80%;
   --rotation: 2deg;
   --delay: 0.45s;
 }
+
 .floating-logo:nth-child(5) {
   top: 35%;
   left: 40%;
   --rotation: 3deg;
   --delay: 0.6s;
 }
+
 .floating-logo:nth-child(6) {
   top: 20%;
   left: 85%;
   --rotation: -2deg;
   --delay: 0.75s;
 }
+
 .floating-logo:nth-child(7) {
   top: 70%;
   left: 10%;
   --rotation: 1.5deg;
   --delay: 0.9s;
 }
+
 .floating-logo:nth-child(8) {
   top: 15%;
   left: 50%;
@@ -111,7 +126,41 @@ body {
   --delay: 1.05s;
 }
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
+@layer utilities {
+  .animate-marquee {
+    animation: marquee 10s linear infinite;
+  }
+
+  @keyframes marquee {
+    0% {
+      transform: translateX(0%);
+    }
+
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+@keyframes pulse-slow {
+  0%, 100% { opacity: 0.1; }
+  50% { opacity: 0.3; }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+.animate-pulse-slow {
+  animation: pulse-slow 5s ease-in-out infinite;
+}
 
 
 @theme inline {
@@ -225,6 +274,7 @@ body {
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }
