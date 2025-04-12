@@ -10,10 +10,10 @@ pipeline {
     stage('Clone Repos') {
       steps {
         dir('frontend') {
-          git branch: 'main', url: "${FRONTEND_REPO}"
+            git branch: 'main', url: "${FRONTEND_REPO}", credentialsId: 'c689c071-d359-4002-89fc-3675bb89bf0f'
         }
         dir('backend') {
-          git branch: 'main', url: "${BACKEND_REPO}"
+            git branch: 'main', url: "${BACKEND_REPO}", credentialsId: 'c689c071-d359-4002-89fc-3675bb89bf0f'
         }
       }
     }
