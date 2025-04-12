@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "TerpNotes | Bring Your Learning to Life",
+  title: "TerpNotes - All the Notes. None of the Stress",
   description:
     "TerpNotes is a UMD-focused note-sharing and studying platform where students compile, rate, and explore notes across semesters. Build your perfect learning environment with searchable, LaTeX-transcribed content and interactive tools.",
 };
