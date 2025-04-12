@@ -38,27 +38,7 @@ export default function BrowseLayout({
                         </h1>
                     </Link>
 
-                    <div className="hidden md:flex items-center gap-4">
-                        <Link
-                            href="/signup"
-                            className="cursor-pointer bg-[#CD1015] hover:bg-[#a60d11] text-white px-5 py-2 rounded-xl transition-all hover:scale-105"
-                        >
-                            Sign Up
-                        </Link>
-                        <Link
-                            href="/login"
-                            className="cursor-pointer bg-[#CD1015] hover:bg-[#a60d11] text-white px-5 py-2 rounded-xl transition-all hover:scale-105"
-                        >
-                            Log In
-                        </Link>
-                        {pathname !== "/browse-notes" &&
-                            <Link
-                                href="/browse"
-                                className="cursor-pointer bg-transparent hover:bg-[#CD1015] text-[#CD1015] border hover:text-white px-5 py-2 rounded-xl border-[#CD1015] transition-all"
-                            >
-                                Browse Notes
-                            </Link>
-                        }
+                    <div className="items-center hidden gap-4 md:flex">
                         {/* Nav Buttons */}
                         <div className="items-center hidden gap-4 md:flex">
                             {user ? (
@@ -69,7 +49,7 @@ export default function BrowseLayout({
 
                                     <button
                                         onClick={() => getAuth(app).signOut()}
-                                        className="px-5 py-2 text-black transition-all bg-blue-200 border hover:bg-blue-300 rounded-xl hover:scale-105"
+                                        className="px-5 py-2 text-black transition-all cursor-pointer hover:scale-105"
                                     >
                                         Sign Out
                                     </button>

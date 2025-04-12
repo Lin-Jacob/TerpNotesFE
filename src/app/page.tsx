@@ -84,7 +84,7 @@ export default function Home() {
 
                 <button
                   onClick={() => getAuth(app).signOut()}
-                  className="px-5 py-2 text-black transition-all bg-blue-200 border hover:bg-blue-300 rounded-xl hover:scale-105"
+                  className="px-5 py-2 text-black transition-all cursor-pointer hover:scale-105"
                 >
                   Sign Out
                 </button>
@@ -110,12 +110,12 @@ export default function Home() {
         {showToast && (
           <div className="fixed top-[4.5rem] md:top-[5.5rem] w-full z-30 flex justify-center px-4">
             <div className="bg-[#CD1015] text-white px-6 py-3 rounded-xl shadow-lg max-w-3xl flex items-center justify-between gap-4 w-full border border-[#a60d11]">
-              <Link href="/blog/release-day" className="hover:underline text-sm sm:text-base font-medium">
+              <Link href="/blog/release-day" className="text-sm font-medium hover:underline sm:text-base">
                 🚀 We just launched! Check out what's new →
               </Link>
               <button
                 onClick={() => setShowToast(false)}
-                className="text-white text-lg font-bold leading-none hover:text-gray-200"
+                className="text-lg font-bold leading-none text-white hover:text-gray-200"
                 aria-label="Close"
               >
                 ×
@@ -138,12 +138,12 @@ export default function Home() {
         {showToast && (
           <div className="fixed top-[4.5rem] md:top-[5.5rem] w-full z-30 flex justify-center px-4">
             <div className="bg-[#CD1015] text-white px-6 py-3 rounded-xl shadow-lg max-w-3xl flex items-center justify-between gap-4 w-full border border-[#a60d11]">
-              <Link href="/blog/release-day" className="hover:underline text-sm sm:text-base font-medium">
+              <Link href="/blog/release-day" className="text-sm font-medium hover:underline sm:text-base">
                 🚀 We just launched! Check out what's new →
               </Link>
               <button
                 onClick={() => setShowToast(false)}
-                className="text-white text-lg font-bold leading-none hover:text-gray-200"
+                className="text-lg font-bold leading-none text-white hover:text-gray-200"
                 aria-label="Close"
               >
                 ×
@@ -222,7 +222,7 @@ export default function Home() {
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
           <Image src={Flower} alt="Flower" className="logo floating-logo" />
           <Image src={Notebook} alt="Notebook" className="logo floating-logo" />
-          <Image src={SmallFlower} alt="Small Flower" className="logo floating-logo hidden md:block" />
+          <Image src={SmallFlower} alt="Small Flower" className="hidden logo floating-logo md:block" />
           <Image src={UMDLogoHandwritten} alt="UMD Logo" className="logo floating-logo" />
           <Image src={Equation} alt="Equation" className="logo floating-logo" />
           <Image src={Hearts} alt="Hearts" className="logo floating-logo" />
