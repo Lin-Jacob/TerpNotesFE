@@ -48,7 +48,7 @@ export default function Home() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
   const [showToast, setShowToast] = useState(true);
-  
+
   const [user, setUser] = useState<User | null>(null);
   const auth = getAuth(app);
 
@@ -59,7 +59,7 @@ export default function Home() {
 
     return () => unsubscribe(); // Clean up listener
   }, [auth]);
-  
+
   return (
     <div className="overflow-x-hidden">
       <header className="fixed top-0 z-40 justify-center hidden w-full pt-6 select-none md:flex backdrop-blur-md">
@@ -493,9 +493,11 @@ export default function Home() {
             Sign up today and explore the best UMD notes, study guides, and resources — curated by students, for students.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-            <button className="bg-[#CD1015] hover:bg-[#a60d11] transition-all text-white px-6 py-3 rounded-xl border hover:scale-105 text-lg">
-              Get Started
-            </button>
+            <Link href="/signup">
+              <button className="bg-[#CD1015] hover:bg-[#a60d11] transition-all text-white px-6 py-3 rounded-xl border hover:scale-105 text-lg">
+                Get Started
+              </button>
+            </Link>
             <Link href="/browse-notes">
               <button className="bg-transparent hover:bg-[#CD1015] text-[#CD1015] border hover:text-white px-6 py-3 rounded-xl border-[#CD1015] text-lg">
                 Browse Notes

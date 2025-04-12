@@ -18,20 +18,12 @@ export default function BrowseLayout({
                 <nav className="max-w-[80%] mx-auto px-6 py-3 flex justify-between items-center rounded-b-2xl">
                     <Link href="/" className="flex items-center gap-3 select-none">
                         <Image src={Logo} alt="TerpNotes Logo" width={30} height={30} />
-                        <h1 className="text-xl font-bold text-[#1F1F1F]" style={{ fontFamily: "sen" }}>
+                        <h1 className="text-xl font-bold text-[#1F1F1F]">
                             TerpNotes
                         </h1>
                     </Link>
 
                     <div className="hidden md:flex items-center gap-4">
-                        {pathname !== "/browse-notes" &&
-                            <Link
-                                href="/browse"
-                                className="cursor-pointer bg-transparent hover:bg-[#CD1015] text-[#CD1015] border hover:text-white px-5 py-2 rounded-xl border-[#CD1015] transition-all"
-                            >
-                                Browse Notes
-                            </Link>
-                        }
                         <Link
                             href="/signup"
                             className="cursor-pointer bg-[#CD1015] hover:bg-[#a60d11] text-white px-5 py-2 rounded-xl transition-all hover:scale-105"
@@ -44,6 +36,14 @@ export default function BrowseLayout({
                         >
                             Log In
                         </Link>
+                        {pathname !== "/browse-notes" &&
+                            <Link
+                                href="/browse"
+                                className="cursor-pointer bg-transparent hover:bg-[#CD1015] text-[#CD1015] border hover:text-white px-5 py-2 rounded-xl border-[#CD1015] transition-all"
+                            >
+                                Browse Notes
+                            </Link>
+                        }
                     </div>
                 </nav>
             </header>
