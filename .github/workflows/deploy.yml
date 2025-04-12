@@ -27,6 +27,10 @@ jobs:
             rm -rf /home/ubuntu/terpnotes
             mkdir -p /home/ubuntu/terpnotes
 
+            # Ensure GitHub is in known_hosts
+            mkdir -p ~/.ssh
+            ssh-keyscan github.com >> ~/.ssh/known_hosts
+
             # Clone the repositories
             git clone git@github.com:Lin-Jacob/TerpNotesFE.git /home/ubuntu/terpnotes/frontend
             git clone git@github.com:olaniyisalami/TerpNotesBE.git /home/ubuntu/terpnotes/backend
