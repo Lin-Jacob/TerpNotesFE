@@ -93,7 +93,7 @@ export default function AuthPage() {
   return (
     <div className="min-h-screen flex flex-col lg:flex-row bg-[#F9F1E5]">
       {/* Left Info Section */}
-      <div className="w-full lg:w-1/2 p-10 bg-[#F3E8D8] shadow-md flex flex-col justify-center items-start space-y-6">
+      <div className="hidden md:flex w-full lg:w-1/2 p-10 bg-[#F3E8D8] shadow-md flex-col justify-center items-start space-y-6">
         <div className="flex items-center gap-4 mb-4">
           <Image src={Logo} alt="TerpNotes Logo" width={48} height={48} />
           <h1 className="text-4xl font-bold text-[#1F1F1F] font-sans tracking-tight">
@@ -110,7 +110,8 @@ export default function AuthPage() {
       </div>
 
       {/* Right Login/Signup Section */}
-      <div className="flex items-center justify-center w-full p-10 lg:w-1/2">
+      <div className="flex flex-col items-center justify-center w-full min-h-screen p-10 lg:w-1/2">
+        <Image src={Logo} alt="TerpNotes Logo" width={48} height={48} />
         <div className="w-full max-w-md p-6 space-y-6 bg-white shadow rounded-2xl">
           <h1 className="text-2xl font-semibold text-center">Welcome</h1>
           {error && <p className="text-sm text-center text-red-500">{error}</p>}
