@@ -1,0 +1,40 @@
+name: Deploy to EC2
+
+on:
+  push:
+    branches:
+      - main  # Trigger on push to main branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up SSH
+      uses: webfactory/ssh-agent@v0.5.3
+      with:
+        ssh-private-key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
+
+    - name: Deploy to EC2
+      run: |
+        ssh -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
+          # Clone the repositories
+          git clone https://github.com/Lin-Jacob/TerpNotesFE.git /home/ubuntu/terpnotes/frontend
+          git clone https://github.com/olaniyisalami/TerpNotesBE.git /home/ubuntu/terpnotes/backend
+
+          # Navigate to the frontend and build it
+          cd /home/ubuntu/terpnotes/frontend
+          npm install
+          npm run build
+
+          # Navigate to the backend and set up
+          cd /home/ubuntu/terpnotes/backend
+          pip install -r requirements.txt
+
+          # Run backend
+          pkill -f flask || true  # Kill any existing Flask processes
+          nohup flask run --host=0.0.0.0 &  # Start Flask server
+        EOF
