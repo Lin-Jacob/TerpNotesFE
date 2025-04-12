@@ -13,7 +13,7 @@ import { app } from "@/lib/firebase";
 import Image from "next/image";
 import Logo from "@/../public/assets/images/logo.svg";
 import { useRouter } from "next/navigation";
-import { getFirestore, doc, setDoc } from "firebase/firestore";
+import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore";
 import { updateProfile } from "firebase/auth";
 
 export default function AuthPage() {
@@ -83,9 +83,24 @@ export default function AuthPage() {
     setError("");
     try {
       const provider = new GoogleAuthProvider();
-      await signInWithPopup(auth, provider);
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+
+      // Check if user exists in Firestore
+      const userRef = doc(db, "users", user.uid);
+      const userSnap = await getDoc(userRef);
+      if (!userSnap.exists()) {
+        await setDoc(userRef, {
+          username: user.displayName || "",
+          email: user.email,
+          createdAt: new Date(),
+          provider: "google",
+        });
+      }
+
       router.push("/browse-notes");
     } catch (err) {
+      console.error("Google sign-in error:", err);
       setError("Google sign-in failed.");
     }
   };
@@ -93,15 +108,15 @@ export default function AuthPage() {
   return (
     <div className="min-h-screen flex flex-col lg:flex-row bg-[#F9F1E5]">
       {/* Left Info Section */}
-      <div className="hidden md:flex w-full lg:w-1/2 p-10 bg-[#F3E8D8] shadow-md flex-col justify-center items-start space-y-6">
-        <div className="flex items-center gap-4 mb-4">
-          <Image src={Logo} alt="TerpNotes Logo" width={48} height={48} />
-          <h1 className="text-4xl font-bold text-[#1F1F1F] font-sans tracking-tight">
+      <div className="hidden md:flex w-full lg:w-1/2 p-10 bg-[#F3E8D8] flex-col justify-center items-center space-y-6 gap-5">
+        <div className="flex items-center justify-center gap-6 mb-0 select-none">
+          <Image src={Logo} alt="TerpNotes Logo" width={64} height={64} />
+          <h1 className="text-6xl font-bold text-[#1F1F1F] font-sans tracking-tight">
             TerpNotes
           </h1>
         </div>
-        <h2 className="text-2xl font-semibold text-[#1F1F1F]">Why TerpNotes?</h2>
-        <ul className="list-disc list-inside space-y-2 text-[#333] text-base leading-relaxed">
+        <p className="text-3xl font-semibold text-[#1F1F1F] mb-0">Why TerpNotes?</p>
+        <ul className="list-disc list-inside space-y-2 text-[#333] text-xl leading-relaxed">
           <li>Access peer-created notes anytime.</li>
           <li>Rate and review for better quality.</li>
           <li>Share and contribute to your classes.</li>
@@ -117,7 +132,7 @@ export default function AuthPage() {
         </span>
         <div className="w-full max-w-md p-6 space-y-6 bg-white shadow rounded-2xl">
           <h1 className="text-2xl font-semibold text-center">Welcome</h1>
-          {error && <p className="text-sm text-center text-red-500">{error}</p>}
+          {error && <p className="text-sm text-center text-red-600">{error}</p>}
 
           {stage === "login" && (
             <>
@@ -175,7 +190,7 @@ export default function AuthPage() {
               />
               <button
                 onClick={handleSignup}
-                className="w-full py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700"
+                className="w-full py-2 text-white bg-red-600 rounded-lg hover:bg-red-700"
               >
                 Sign Up
               </button>
@@ -197,9 +212,34 @@ export default function AuthPage() {
               </div>
               <button
                 onClick={handleGoogleSignin}
-                className="w-full py-2 text-white bg-red-500 rounded-lg hover:bg-red-600"
+                className="flex items-center justify-center w-full gap-3 py-2 transition border border-gray-300 rounded-lg hover:bg-gray-100"
               >
-                Sign in with Google
+                <svg
+                  className="w-5 h-5"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 48 48"
+                >
+                  <path
+                    fill="#EA4335"
+                    d="M24 9.5c3.24 0 6.15 1.12 8.45 2.95l6.3-6.3C34.94 2.64 29.79 0 24 0 14.64 0 6.67 5.95 2.96 14.55l7.9 6.14C12.56 13.8 17.87 9.5 24 9.5z"
+                  />
+                  <path
+                    fill="#4285F4"
+                    d="M46.5 24c0-1.64-.15-3.21-.43-4.74H24v9h12.7c-.55 2.92-2.2 5.38-4.7 7.05l7.5 5.85C44.56 37.24 46.5 30.96 46.5 24z"
+                  />
+                  <path
+                    fill="#FBBC05"
+                    d="M10.86 28.41c-.62-1.84-.98-3.8-.98-5.91s.36-4.07.98-5.91L2.96 10.45A23.93 23.93 0 000 24c0 3.88.92 7.54 2.96 10.91l7.9-6.14z"
+                  />
+                  <path
+                    fill="#34A853"
+                    d="M24 48c6.48 0 11.93-2.14 15.9-5.8l-7.5-5.85c-2.1 1.42-4.8 2.25-8.4 2.25-6.13 0-11.44-4.3-13.14-10.19l-7.9 6.14C6.67 42.05 14.64 48 24 48z"
+                  />
+                  <path fill="none" d="M0 0h48v48H0z" />
+                </svg>
+                <span className="text-sm font-medium text-gray-700">
+                  Sign in with Google
+                </span>
               </button>
             </>
           )}

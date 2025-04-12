@@ -145,7 +145,7 @@ export default function BrowseNotes() {
             {/* Background overlay for mobile */}
             {detailsOpen && (
                 <div
-                    className="fixed inset-0 bg-black/20 z-30 md:hidden"
+                    className="fixed inset-0 z-30 bg-black/20 md:hidden"
                     onClick={() => setDetailsOpen(false)}
                 />
             )}
@@ -186,13 +186,13 @@ export default function BrowseNotes() {
                     ))}
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
                     {courses.map((course, idx) => (
                         <div
                             key={idx}
                             className="bg-white border border-[#e0d7cb] rounded-2xl shadow p-6"
                         >
-                            <div className="mb-3 flex items-center justify-between">
+                            <div className="flex items-center justify-between mb-3">
                                 <h3
                                     className="text-xl font-bold text-[#1F1F1F]"
                                     style={{ fontFamily: "sen" }}
@@ -215,7 +215,7 @@ export default function BrowseNotes() {
                                 ))}
                             </div>
 
-                            <div className="space-y-4 mt-4">
+                            <div className="mt-4 space-y-4">
                                 {course.professors.map((prof, i) => (
                                     <div
                                         key={i}
@@ -263,7 +263,7 @@ export default function BrowseNotes() {
                     </p>
 
                     {/* Mock contents */}
-                    <div className="space-y-4 mb-6">
+                    <div className="mb-6 space-y-4">
                         <div className="bg-[#F9F1E5] p-4 rounded-xl border border-[#e0d7cb]">
                             <p className="text-sm text-[#1F1F1F]">
                                 <strong>OCR Preview:</strong> "In Java, all classes inherit from the Object class. This allows..."
