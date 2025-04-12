@@ -99,7 +99,7 @@ button {
 }
 
 .floating-logo:nth-child(5) {
-  top: 35%;
+  top: 30%;
   left: 40%;
   --rotation: 3deg;
   --delay: 0.6s;

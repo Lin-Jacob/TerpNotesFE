@@ -38,24 +38,21 @@ export default function BrowseNotes() {
                     className="text-4xl font-extrabold text-[#1F1F1F] mb-8 text-center"
                     style={{ fontFamily: "sen" }}
                 >
-                    📚 Browse Notes
+                    Search notes
                 </h1>
 
-                {/* Search */}
-                <div className="flex flex-col md:flex-row items-center gap-4 mb-6">
-                    <div className="relative w-full md:w-2/3">
-                        <input
-                            type="text"
-                            placeholder="Search for a course, professor, or topic..."
-                            className="w-full px-5 py-3 rounded-xl border border-[#e0d7cb] bg-white text-[#1F1F1F] focus:outline-none focus:ring-2 focus:ring-[#CD1015]"
-                            value={searchQuery}
-                            onChange={(e) => setSearchQuery(e.target.value)}
-                        />
-                        <FiSearch className="absolute right-4 top-1/2 transform -translate-y-1/2 text-[#CD1015]" />
-                    </div>
+                <div className="flex items-center gap-3 bg-white border border-[#e0d7cb] rounded-xl px-5 py-3 shadow-md mb-4">
+                    <FiSearch className="text-[#CD1015]" size={20} />
+                    <input
+                        type="text"
+                        placeholder="Search for courses, professors, topics..."
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        className="w-full focus:outline-none bg-transparent text-[#1F1F1F]"
+                        style={{ fontFamily: "sen" }}
+                    />
                 </div>
 
-                {/* Filters */}
                 <div className="flex flex-wrap gap-3 mb-10">
                     {filters.map((filter, index) => (
                         <span
@@ -71,7 +68,6 @@ export default function BrowseNotes() {
                     ))}
                 </div>
 
-                {/* Results */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8">
                     {courses.map((course, idx) => (
                         <div
@@ -90,7 +86,6 @@ export default function BrowseNotes() {
                                 </span>
                             </div>
 
-                            {/* Course Tags */}
                             <div className="flex flex-wrap gap-2 mb-4">
                                 {course.tags.map((tag, idx) => (
                                     <span

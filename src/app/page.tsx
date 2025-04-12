@@ -3,22 +3,19 @@
 import Image from "next/image"
 import Link from "next/link"
 
-import Grid from "@/../public/assets/images/grid.svg"
 import Logo from "@/../public/assets/images/logo.svg"
 
 import Flower from "@/../public/assets/images/decorations/flower_drawing.svg"
 import Notebook from "@/../public/assets/images/decorations/notebook_drawing.svg"
 import SmallFlower from "@/../public/assets/images/decorations/small_flower_drawing.svg"
-import UMDLogo from "@/../public/assets/images/decorations/umd_logo_drawing.svg"
+import UMDLogoHandwritten from "@/../public/assets/images/decorations/umd_logo_drawing.svg"
 
 import Equation from "@/../public/assets/images/decorations/equation.svg"
 import Hearts from "@/../public/assets/images/decorations/hearts.svg"
 import Lightbulb from "@/../public/assets/images/decorations/lightbulb.svg"
 import PieChart from "@/../public/assets/images/decorations/pie_chart.svg"
 
-import InstagramIcon from "@/../public/assets/images/decorations/instagram_icon.svg"
-import TwitterIcon from "@/../public/assets/images/decorations/twitter_icon.svg"
-import FacebookIcon from "@/../public/assets/images/decorations/facebook_icon.svg"
+import UMDLogo from "@/../public/assets/images/umd_logo.png"
 
 import { useState } from "react"
 
@@ -48,6 +45,7 @@ const slides = [
 export default function Home() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [showToast, setShowToast] = useState(true);
 
   return (
     <div className="overflow-x-hidden">
@@ -85,6 +83,23 @@ export default function Home() {
 
           </div>
         </nav>
+
+        {showToast && (
+          <div className="fixed top-[4.5rem] md:top-[5.5rem] w-full z-30 flex justify-center px-4">
+            <div className="bg-[#CD1015] text-white px-6 py-3 rounded-xl shadow-lg max-w-3xl flex items-center justify-between gap-4 w-full border border-[#a60d11]">
+              <Link href="/blog/release-day" className="hover:underline text-sm sm:text-base font-medium">
+                🚀 We just launched! Check out what's new →
+              </Link>
+              <button
+                onClick={() => setShowToast(false)}
+                className="text-white text-lg font-bold leading-none hover:text-gray-200"
+                aria-label="Close"
+              >
+                ×
+              </button>
+            </div>
+          </div>
+        )}
       </header>
 
       <div className="md:hidden fixed top-0 left-0 z-50 w-full px-4 py-4 bg-[#F9F1E5] border-b border-[#e0d7cb] flex items-center justify-between">
@@ -97,6 +112,22 @@ export default function Home() {
             <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
           </svg>
         </button>
+        {showToast && (
+          <div className="fixed top-[4.5rem] md:top-[5.5rem] w-full z-30 flex justify-center px-4">
+            <div className="bg-[#CD1015] text-white px-6 py-3 rounded-xl shadow-lg max-w-3xl flex items-center justify-between gap-4 w-full border border-[#a60d11]">
+              <Link href="/blog/release-day" className="hover:underline text-sm sm:text-base font-medium">
+                🚀 We just launched! Check out what's new →
+              </Link>
+              <button
+                onClick={() => setShowToast(false)}
+                className="text-white text-lg font-bold leading-none hover:text-gray-200"
+                aria-label="Close"
+              >
+                ×
+              </button>
+            </div>
+          </div>
+        )}
       </div>
 
       {sidebarOpen && (
@@ -114,9 +145,15 @@ export default function Home() {
               </button>
             </div>
             <nav className="flex flex-col gap-3">
-              <button className="bg-[#CD1015] text-white px-4 py-2 rounded-lg">Sign Up</button>
-              <button className="bg-[#CD1015] text-white px-4 py-2 rounded-lg">Log In</button>
-              <button className="border border-[#CD1015] text-[#CD1015] px-4 py-2 rounded-lg">Browse Notes</button>
+              <Link href="/signup">
+                <button className="bg-[#CD1015] text-white px-4 py-2 rounded-lg">Sign Up</button>
+              </Link>
+              <Link href="/login">
+                <button className="bg-[#CD1015] text-white px-4 py-2 rounded-lg">Log In</button>
+              </Link>
+              <Link href="/browse-notes">
+                <button className="border border-[#CD1015] text-[#CD1015] px-4 py-2 rounded-lg">Browse Notes</button>
+              </Link>
             </nav>
           </div>
         </div>
@@ -151,9 +188,11 @@ export default function Home() {
             TerpNotes is a UMD-focused note-sharing and studying platform where students compile, rate, and explore notes across semesters.
           </p>
           <div className="mt-8">
-            <button className="bg-[#CD1015] hover:bg-[#a60d11] text-white px-6 py-3 rounded-xl border hover:scale-105 transition-all">
-              Browse Notes
-            </button>
+            <Link href="/browse-notes">
+              <button className="bg-[#CD1015] hover:bg-[#a60d11] text-white px-6 py-3 rounded-xl border hover:scale-105 transition-all">
+                Browse Notes
+              </button>
+            </Link>
           </div>
         </div>
 
@@ -161,7 +200,7 @@ export default function Home() {
           <Image src={Flower} alt="Flower" className="logo floating-logo" />
           <Image src={Notebook} alt="Notebook" className="logo floating-logo" />
           <Image src={SmallFlower} alt="Small Flower" className="logo floating-logo hidden md:block" />
-          <Image src={UMDLogo} alt="UMD Logo" className="logo floating-logo" />
+          <Image src={UMDLogoHandwritten} alt="UMD Logo" className="logo floating-logo" />
           <Image src={Equation} alt="Equation" className="logo floating-logo" />
           <Image src={Hearts} alt="Hearts" className="logo floating-logo" />
           <Image src={Lightbulb} alt="Lightbulb" className="logo floating-logo" />
@@ -191,8 +230,16 @@ export default function Home() {
               </span>
             ))}
           </div>
-
         </div>
+        <Link target="_blank" href="https://www.umd.edu/">
+          <Image
+            className="mt-10"
+            src={UMDLogo}
+            alt="University of Maryland Logo"
+            width={150}
+            height={50}
+          />
+        </Link>
       </section>
 
       <section className="bg-[#F9F1E5] py-10 flex flex-col items-center text-center border border-gray">
@@ -201,7 +248,7 @@ export default function Home() {
           <p className="text-lg md:text-xl font-semibold text-[#1F1F1F]">
             Loved by students at
           </p>
-          <Image src={UMDLogo} alt="UMD Logo" width={32} height={32} />
+          <Image src={UMDLogoHandwritten} alt="UMD Logo" width={32} height={32} />
           <Image src={Hearts} alt="Hearts" width={30} height={30} className="text-red-500" style={{ filter: 'invert(18%) sepia(87%) saturate(6875%) hue-rotate(357deg) brightness(88%) contrast(114%)' }} />
         </div>
         <p className="text-[#333] max-w-xl text-sm">
@@ -212,8 +259,6 @@ export default function Home() {
 
       <section className="relative bg-[#F3E8D8] py-20 px-6 overflow-hidden">
         <div className="absolute inset-0 z-0 bg-[radial-gradient(#cd101533_1px,transparent_1px)] [background-size:20px_20px] opacity-60" />
-
-
 
         <svg className="absolute top-24 left-4 w-28 opacity-10 animate-float" viewBox="0 0 100 20" fill="none">
           <path d="M0 10 C30 -10, 70 30, 100 10" stroke="#CD1015" strokeWidth="3" fill="none" />
@@ -428,86 +473,14 @@ export default function Home() {
             <button className="bg-[#CD1015] hover:bg-[#a60d11] transition-all text-white px-6 py-3 rounded-xl border hover:scale-105 text-lg">
               Get Started
             </button>
-            <button className="bg-transparent hover:bg-[#CD1015] text-[#CD1015] border hover:text-white px-6 py-3 rounded-xl border-[#CD1015] text-lg">
-              Browse Notes
-            </button>
+            <Link href="/browse-notes">
+              <button className="bg-transparent hover:bg-[#CD1015] text-[#CD1015] border hover:text-white px-6 py-3 rounded-xl border-[#CD1015] text-lg">
+                Browse Notes
+              </button>
+            </Link>
           </div>
         </div>
       </section>
-
-
-
-      <footer className="bg-[#F9F1E5] border-t border-[#e0d7cb] px-6 py-12">
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
-
-          <div className="flex items-center gap-3">
-            <Image src={Logo} alt="TerpNotes Logo" width={30} height={30} />
-            <span className="text-xl font-semibold text-[#1F1F1F]">
-              TerpNotes
-            </span>
-          </div>
-
-          <div className="flex flex-wrap justify-center gap-6 text-[#333] text-sm font-medium">
-            <a href="/terms-of-service" target="_blank" className="hover:text-[#CD1015] transition flex">
-              Terms of Service
-              <span className="ml-1">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={2}
-                  stroke="currentColor"
-                  className="w-5 h-5"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M13.5 3H21m0 0v7.5M21 3L10 14M5 5h5m-5 0v14h14v-5"
-                  />
-                </svg>
-              </span>
-            </a>
-            <a href="/privacy-policy" target="_blank" className="hover:text-[#CD1015] transition flex">
-              Privacy Policy
-              <span className="ml-1">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={2}
-                  stroke="currentColor"
-                  className="w-5 h-5"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M13.5 3H21m0 0v7.5M21 3L10 14M5 5h5m-5 0v14h14v-5"
-                  />
-                </svg>
-              </span>
-            </a>
-            <a href="/about" className="hover:text-[#CD1015] transition">About</a>
-            <a href="/contact" className="hover:text-[#CD1015] transition">Contact</a>
-          </div>
-
-          <div className="flex gap-3">
-            <a href="https://www.instagram.com/terpnotesumd/" target="_blank" className="w-[25px] h-[25px] hover:scale-110 transition-transform flex items-center justify-center" aria-label="Instagram">
-              <Image src={InstagramIcon} alt="Instagram" width={22.5} height={22.5} />
-            </a>
-            <a href="https://x.com/terpnotesumd/" target="_blank" className="w-[25px] h-[25px] hover:scale-110 transition-transform flex items-center justify-center" aria-label="Twitter">
-              <Image src={TwitterIcon} alt="Twitter" width={25} height={25} />
-            </a>
-            <a href="#" className="h-[25px] hover:scale-110 transition-transform flex items-center justify-center" aria-label="Facebook">
-              <Image src={FacebookIcon} alt="Facebook" width={12} height={12} />
-            </a>
-          </div>
-        </div>
-
-        <div className="mt-10 border-t border-[#e0d7cb] pt-6 text-center text-sm text-[#666]">
-          © {new Date().getFullYear()} TerpNotes. Built with ❤️ at University of Maryland, College Park.
-        </div>
-      </footer>
-
     </div>
   );
 }
