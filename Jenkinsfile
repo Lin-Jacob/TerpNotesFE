@@ -35,13 +35,13 @@ pipeline {
     }
 
     stage('Run Backend') {
-      steps {
+    steps {
         dir('backend') {
-          sh 'pip install -r requirements.txt'
-          sh 'pkill -f flask || true'
-          sh 'nohup flask run --host=0.0.0.0 &'
+        sh 'pip install -r requirements.txt'
+        sh 'pkill -f app.py || true'
+        sh 'nohup python3 app.py &'
         }
-      }
+    }
     }
   }
 }
