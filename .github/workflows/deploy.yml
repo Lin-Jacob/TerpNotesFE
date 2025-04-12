@@ -22,19 +22,19 @@ jobs:
       run: |
         ssh -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
           # Clone the repositories
-          git clone https://github.com/Lin-Jacob/TerpNotesFE.git /home/ubuntu/terpnotes/frontend
-          git clone https://github.com/olaniyisalami/TerpNotesBE.git /home/ubuntu/terpnotes/backend
+          sudo git clone https://github.com/Lin-Jacob/TerpNotesFE.git /home/ubuntu/terpnotes/frontend
+          sudo git clone https://github.com/olaniyisalami/TerpNotesBE.git /home/ubuntu/terpnotes/backend
 
           # Navigate to the frontend and build it
-          cd /home/ubuntu/terpnotes/frontend
-          npm install
-          npm run build
+          sudo cd /home/ubuntu/terpnotes/frontend
+          sudo npm install
+          sudo npm run build
 
           # Navigate to the backend and set up
-          cd /home/ubuntu/terpnotes/backend
-          pip install -r requirements.txt
+          sudo cd /home/ubuntu/terpnotes/backend
+          sudo pip install -r requirements.txt
 
           # Run backend
-          pkill -f flask || true  # Kill any existing Flask processes
-          nohup flask run --host=0.0.0.0 &  # Start Flask server
+          sudo pkill -f app.py || true
+          sudo nohup python3 app.py &
         EOF
